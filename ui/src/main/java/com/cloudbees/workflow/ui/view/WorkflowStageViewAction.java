@@ -7,6 +7,7 @@ package com.cloudbees.workflow.ui.view;
 
 import hudson.Extension;
 import hudson.model.Action;
+import jenkins.model.Jenkins;
 import jenkins.model.TransientActionFactory;
 import org.jenkinsci.plugins.workflow.job.WorkflowJob;
 
@@ -34,6 +35,14 @@ public class WorkflowStageViewAction implements Action {
     @Override
     public String getUrlName() {
         return "workflow-stage";
+    }
+
+    public boolean getHasBlueOcean() {
+        Jenkins jenkins = Jenkins.getInstance();
+        if (jenkins == null) {
+            throw new IllegalStateException("Jenkins not started");
+        }
+        return jenkins.getPluginManager().getPlugin("blueocean") == null;
     }
 
     @Override

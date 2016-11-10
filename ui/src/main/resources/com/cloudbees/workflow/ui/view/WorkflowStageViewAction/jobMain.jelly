@@ -5,5 +5,13 @@
     It loads jobMain.jelly for all Action impls bound to a WorkflowJob.
 -->
 <j:jelly xmlns:j="jelly:core" xmlns:wf="/com/cloudbees/workflow">
-    <wf:controller name="pipeline-staged" fragCaption="Stage View" />
+    <j:choose>
+        <j:when test="${it.getHasBlueOcean()}">
+            <div class="blueocean-message">
+                <p>Blue Ocean is a new user experience built from the ground up for Pipeline - <a href="https://jenkins.io/projects/blueocean/">Learn More</a></p>
+            </div>
+        </j:when>
+    </j:choose>
+    <wf:controller name="pipeline-staged" fragCaption="Stage View">
+    </wf:controller>
 </j:jelly>
